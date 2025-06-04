@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-1">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofosu Samuel Kwabena | Creative Graphic Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .theme-1 {
+            --primary: #3b82f6;
+            --secondary: #1e40af;
+            --accent: #10b981;
+            --text: #1f2937;
+            --bg: #f9fafb;
+        }
+        .theme-2 {
+            --primary: #8b5cf6;
+            --secondary: #6d28d9;
+            --accent: #ec4899;
+            --text: #1f2937;
+            --bg: #f5f3ff;
+        }
+        .theme-3 {
+            --primary: #ef4444;
+            --secondary: #b91c1c;
+            --accent: #f59e0b;
+            --text: #1f2937;
+            --bg: #fef2f2;
+        }
+        .theme-4 {
+            --primary: #10b981;
+            --secondary: #047857;
+            --accent: #3b82f6;
+            --text: #1f2937;
+            --bg: #ecfdf5;
+        }
+        .theme-5 {
+            --primary: #f59e0b;
+            --secondary: #b45309;
+            --accent: #8b5cf6;
+            --text: #1f2937;
+            --bg: #fffbeb;
+        }
+
+        .bg-primary {
+            background-color: var(--primary);
+        }
+        .bg-secondary {
+            background-color: var(--secondary);
+        }
+        .bg-accent {
+            background-color: var(--accent);
+        }
+        .bg-base {
+            background-color: var(--bg);
+        }
+        .text-primary {
+            color: var(--primary);
+        }
+        .text-secondary {
+            color: var(--secondary);
+        }
+        .text-accent {
+            color: var(--accent);
+        }
+        .text-base {
+            color: var(--text);
+        }
+        .border-primary {
+            border-color: var(--primary);
+        }
+        .hover\:bg-primary:hover {
+            background-color: var(--primary);
+        }
+        .hover\:text-primary:hover {
+            color: var(--primary);
+        }
+
+        .work-item {
+            transition: all 0.3s ease;
+        }
+        .work-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-switcher {
+            position: fixed;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .theme-switcher:hover {
+            right: -35px;
+        }
+        .theme-options {
+            display: none;
+            position: fixed;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+        .theme-options.show {
+            display: block;
+        }
+        .theme-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .theme-circle:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-base text-base font-sans leading-relaxed">
+    <!-- Theme Switcher -->
+    <div class="theme-switcher px-4 py-2 rounded-tl rounded-tr cursor-pointer bg-primary text-white font-medium" onclick="toggleThemeOptions()">
+        Themes
+    </div>
+    <div id="themeOptions" class="theme-options">
+        <div class="grid grid-cols-2 gap-2">
+            <div class="theme-circle bg-blue-500 border border-blue-600" onclick="changeTheme('theme-1')" title="Ocean Blue"></div>
+            <div class="theme-circle bg-purple-500 border border-purple-600" onclick="changeTheme('theme-2')" title="Royal Purple"></div>
+            <div class="theme-circle bg-red-500 border border-red-600" onclick="changeTheme('theme-3')" title="Fiery Red"></div>
+            <div class="theme-circle bg-green-500 border border-green-600" onclick="changeTheme('theme-4')" title="Emerald Green"></div>
+            <div class="theme-circle bg-yellow-500 border border-yellow-600" onclick="changeTheme('theme-5')" title="Sunny Yellow"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="sticky top-0 z-50 bg-white bg-opacity-90 shadow-sm backdrop-blur-sm">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-primary hover:text-secondary transition">OSK.</a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-primary transition">Home</a>
+                    <a href="#about" class="hover:text-primary transition">About</a>
+                    <a href="#skills" class="hover:text-primary transition">Skills</a>
+                    <a href="#work" class="hover:text-primary transition">Work</a>
+                    <a href="#contact" class="hover:text-primary transition">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-primary">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden hidden px-4 pt-2 pb-4 space-y-2">
+                <a href="#home" class="block hover:text-primary transition">Home</a>
+                <a href="#about" class="block hover:text-primary transition">About</a>
+                <a href="#skills" class="block hover:text-primary transition">Skills</a>
+                <a href="#work" class="block hover:text-primary transition">Work</a>
+                <a href="#contact" class="block hover:text-primary transition">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="py-20 px-6 bg-gradient-to-br from-primary/10 via-white to-accent/10">
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Hello, I'm <span class="text-primary">Ofosu Samuel Kwabena</span></h1>
+                <h2 class="text-2xl md:text-3xl mb-6 text-secondary">Web Developer and Creative Content Writer</h2>
+                <p class="text-lg mb-8 max-w-lg">Transforming ideas into visually stunning designs with a passion for creativity and attention to detail.</p>
+                <div class="flex space-x-4">
+                    <a href="#work" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary transition shadow-lg">View My Work</a>
+                    <a href="#contact" class="px-6 py-3 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition">Contact Me</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative">
+                    <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary">
+                        <img src="sam.jpg" 
+                             alt="Ofosu Samuel Kwabena" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 bg-accent text-white px-4 py-2 rounded-lg shadow-lg">
+                        <p class="font-medium">1+ Years Experience</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16 text-primary">About <span class="text-secondary">Me</span></h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-10 md:mb-0 flex justify-center">
+                    <div class="relative group">
+                        <div class="w-48 h-48 md:w-64 md:h-64 rounded-lg overflow-hidden border-4 border-primary shadow-xl transform group-hover:rotate-1 transition">
+                            <img src="sam4.jpg" 
+                                 alt="Ofosu working" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 bg-secondary text-white px-4 py-2 rounded-lg shadow-lg transform rotate-3 group-hover:rotate-6 transition">
+                            <div class="flex items-center">
+                                <i class="fas fa-award mr-2"></i>
+                                <p class="font-medium">Creative Mind</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-2/3 md:pl-16">
+                    <h3 class="text-2xl font-semibold mb-4 text-secondary">Who I Am</h3>
+                    <p class="mb-6">I'm Ofosu Samuel Kwabena, a passionate web develpment  with a year of professional experience in creating compelling websites and applications. My journey in coding began with a deep fascination for visual storytelling and has evolved into a professional career where I combine creativity with strategy and problem solving.</p>
+                    <p class="mb-6">I believe that good design is not just about aesthetics but about solving problems and communicating messages effectively. Every project is an opportunity to learn and push creative boundaries.</p>
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-accent mr-2"></i>
+                            <span>Creative Problem Solving</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-accent mr-2"></i>
+                            <span>Attention to Detail</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-accent mr-2"></i>
+                            <span>Story Telling</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-accent mr-2"></i>
+                            <span>Typography</span>
+                        </div>
+                    </div>
+                    <a href="#contact" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary transition inline-flex items-center">
+                        <span>Let's Work Together</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6 bg-gradient-to-br from-primary/10 via-white to-accent/10">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16 text-primary">My <span class="text-secondary">Skills</span></h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition text-center">
+                    <div class="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-palette text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Web Development</h3>
+                    <p>Creating distinctive and problem solving applications.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition text-center">
+                    <div class="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-laptop-code text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">UI/UX Design</h3>
+                    <p>Crafting intuitive and visually appealing user interfaces for digital products.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition text-center">
+                    <div class="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-pencil-ruler text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Web Design</h3>
+                    <p>Design beautiful web interfaces.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition text-center">
+                    <div class="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-mobile-alt text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Social Media</h3>
+                    <p>Creating engaging social media graphics tailored for different platforms.</p>
+                </div>
+            </div>
+
+            <div class="mt-16">
+                <h3 class="text-2xl font-semibold text-center mb-8 text-secondary">Technical Proficiency</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="skill-item">
+                        <div class="w-20 h-20 mx-auto mb-2">
+                            <img src="https://cdn.worldvectorlogo.com/logos/html-1.svg" 
+                                 alt="html" class="w-full h-full object-contain">
+                        </div>
+                        <p class="text-center font-medium">Html</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="w-20 h-20 mx-auto mb-2">
+                            <img src="https://cdn.worldvectorlogo.com/logos/css-3.svg" 
+                                 alt="css" class="w-full h-full object-contain">
+                        </div>
+                        <p class="text-center font-medium">CSS</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="w-20 h-20 mx-auto mb-2">
+                            <img src="https://cdn.worldvectorlogo.com/logos/javascript-1.svg" 
+                                 alt="javascript" class="w-full h-full object-contain">
+                        </div>
+                        <p class="text-center font-medium">Javascript</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="w-20 h-20 mx-auto mb-2">
+                            <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" 
+                                 alt="react" class="w-full h-full object-contain">
+                        </div>
+                        <p class="text-center font-medium">React</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="w-20 h-20 mx-auto mb-2">
+                            <img src="https://cdn.worldvectorlogo.com/logos/figma-icon.svg" 
+                                 alt="Figma" class="w-full h-full object-contain">
+                        </div>
+                        <p class="text-center font-medium">Figma</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="w-20 h-20 mx-auto mb-2">
+                            <img src="https://cdn.worldvectorlogo.com/logos/adobe-xd-2.svg" 
+                                 alt="Adobe XD" class="w-full h-full object-contain">
+                        </div>
+                        <p class="text-center font-medium">Adobe XD</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="w-20 h-20 mx-auto mb-2">
+                            <img src="https://cdn.worldvectorlogo.com/logos/canva-wordmark-2.svg" 
+                                 alt="Canva" class="w-full h-full object-contain">
+                        </div>
+                        <p class="text-center font-medium">Canva</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="w-20 h-20 mx-auto mb-2">
+                            <img src="https://cdn.worldvectorlogo.com/logos/visual-studio-code-1.svg" 
+                                 alt="vscode" class="w-full h-full object-contain">
+                        </div>
+                        <p class="text-center font-medium">Vs Code</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16 text-primary">My <span class="text-secondary">Work</span></h2>
+            
+            <!-- Filter Buttons -->
+            <div class="flex justify-center mb-12 flex-wrap gap-2">
+                <button class="px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" onclick="filterWork('all')">All</button>
+                <!-- <button class="px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" onclick="filterWork('branding')">Branding</button> -->
+                <!-- <button class="px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" onclick="filterWork('print')">Websites</button>
+                <button class="px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" onclick="filterWork('digital')">We</button>
+                <button class="px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition" onclick="filterWork('packaging')">Packaging</button> -->
+            </div>
+            
+            <!-- Work Gallery -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="work-item branding" onclick="openModal('project1')">
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1510279770292-4b34de9f5c1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Brand Identity Project" class="w-full h-full object-cover">
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-xl font-semibold">Nexus Brand Identity</h3>
+                        <a href=""><p class="text-primary">Branding</p></a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="work-item print" onclick="openModal('project2')">
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                             alt="Book Cover Design" class="w-full h-full object-cover">
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-xl font-semibold">Novel Book Cover</h3>
+                        <a href=""><p class="text-primary">Print Design</p></a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="work-item digital" onclick="openModal('project3')">
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" 
+                             alt="Mobile App Design" class="w-full h-full object-cover">
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-xl font-semibold">Fitness App UI</h3>
+                        <a href=""><p class="text-primary">Digital Design</p></a>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <!-- <div class="work-item packaging" onclick="openModal('project4')">
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1583947581924-860bda6a26df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                             alt="Product Packaging" class="w-full h-full object-cover">
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-xl font-semibold">Organic Tea Packaging</h3>
+                        <p class="text-primary">Packaging</p>
+                    </div>
+                </div> -->
+                
+                <!-- Project 5 -->
+                <!-- <div class="work-item branding" onclick="openModal('project5')">
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                             alt="Business Cards" class="w-full h-full object-cover">
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-xl font-semibold">Corporate Stationery</h3>
+                        <p class="text-primary">Branding</p>
+                    </div>
+                </div> -->
+                
+                <!-- Project 6 -->
+                <!-- <div class="work-item digital" onclick="openModal('project6')">
+                    <div class="bg-gray-100 rounded-xl overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" 
+                             alt="Website Design" class="w-full h-full object-cover">
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-xl font-semibold">E-commerce Website</h3>
+                        <p class="text-primary">Digital Design</p>
+                    </div>
+                </div>
+            </div> -->
+            
+            <div class="text-center mt-12">
+                <a href="#" class="px-6 py-3 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition inline-flex items-center">
+                    <span>View More Projects</span>
+                    <i class="fas fa-long-arrow-alt-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 px-6 bg-gradient-to-br from-primary/10 via-white to-accent/10">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16 text-primary"><span class="text-secondary">Testimonials</span></h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="fucken.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Clement Appeynarh</h4>
+                            <p class="text-sm text-gray-600">IT Student, </p>
+                        </div>
+                    </div>.
+                    <p class="italic text-gray-700 mb-4">"Ofosu Samuel is a ready to learn learner and loves teamwork."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="morrison.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Morrison williams</h4>
+                            <p class="text-sm text-gray-600">CEO at JUST-US TECH</p>
+                        </div>
+                    </div>
+                    <p class="italic text-gray-700 mb-4">"Samuel is a creative and problem solving mind who is concerned about the African Tech Revolution."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="richy.jpg" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Richmond Agbenyefia</h4>
+                            <p class="text-sm text-gray-600">Senior Developer</p>
+                        </div>
+                    </div>
+                    <p class="italic text-gray-700 mb-4">"I love Samuel's sense of creativity and problem solving skills."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16 text-primary">Get In <span class="text-secondary">Touch</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 text-secondary">Let's Collaborate</h3>
+                    <p class="mb-8">Have a project in mind or want to discuss potential opportunities? I'd love to hear from you! Fill out the form or reach out directly through one of the channels below.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Email</h4>
+                                <a href="mailto:hello@ofosudesign.com" class="hover:text-primary transition">goldensamgh207@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Phone</h4>
+                                <a href="tel:+1234567890" class="hover:text-primary transition">+233 256 994 450</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Location</h4>
+                                <p>East Legon, Ghana</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-semibold mb-4">Connect With Me</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                                <i class="fab fa-behance"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                                <i class="fab fa-dribbble"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                       <input type="hidden" name="access_key" value="abf20c02-e56e-4b67-827d-fa4e634a800d">
+                       <input type="hidden" name="subject" value="my portfolio">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block mb-2 font-medium">Your Name</label>
+                                <input name="name" type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label for="email" class="block mb-2 font-medium">Email Address</label>
+                                <input name="email" type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block mb-2 font-medium">Subject</label>
+                            <input name="subject" type="text" id="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="message" class="block mb-2 font-medium">Message</label>
+                            <textarea name="message" id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                        </div>
+                        <button type="submit" class="w-full md:w-auto px-8 py-3 bg-primary text-white rounded-lg hover:bg-secondary transition font-medium">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-primary text-white">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-bold hover:text-gray-300 transition">OSK.</a>
+                    <p class="mt-2">Web Developer and Creative Content Writer</p>
+                </div>
+                
+                <div class="flex flex-col md:flex-row md:space-x-12 space-y-4 md:space-y-0 text-center md:text-left">
+                    <div>
+                        <h4 class="font-semibold mb-2">Quick Links</h4>
+                        <ul class="space-y-1">
+                            <li><a href="#home" class="hover:text-gray-300 transition">Home</a></li>
+                            <li><a href="#about" class="hover:text-gray-300 transition">About</a></li>
+                            <li><a href="#work" class="hover:text-gray-300 transition">Work</a></li>
+                            <li><a href="#contact" class="hover:text-gray-300 transition">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold mb-2">Services</h4>
+                        <ul class="space-y-1">
+                            <li><a href="#" class="hover:text-gray-300 transition">Web Development</a></li>
+                            <li><a href="#" class="hover:text-gray-300 transition">Web Design</a></li>
+                            <li><a href="#" class="hover:text-gray-300 transition">UI/UX Development</a></li>
+                            <li><a href="#" class="hover:text-gray-300 transition">Creative Content Creation</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold mb-2">Connect</h4>
+                        <div class="flex justify-center md:justify-start space-x-4">
+                            <a href="#" class="hover:text-gray-300 transition"><i class="fab fa-behance"></i></a>
+                            <a href="#" class="hover:text-gray-300 transition"><i class="fab fa-dribbble"></i></a>
+                            <a href="#" class="hover:text-gray-300 transition"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="hover:text-gray-300 transition"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/20 mt-12 pt-8 text-center text-sm">
+                <p>&copy; <span id="year"></span> Ofosu Samuel Kwabena. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Modals -->
+    <div id="projectModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 id="modalTitle" class="text-2xl font-bold"></h3>
+                        <p id="modalCategory" class="text-primary"></p>
+                    </div>
+                    <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <div id="modalContent" class="prose max-w-none">
+                    <!-- Content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Theme switching functionality
+        function toggleThemeOptions() {
+            document.getElementById('themeOptions').classList.toggle('show');
+        }
+
+        function changeTheme(themeName) {
+            document.documentElement.className = themeName;
+            document.getElementById('themeOptions').classList.remove('show');
+        }
+
+        // Filter work items
+        function filterWork(category) {
+            const items = document.querySelectorAll('.work-item');
+            
+            items.forEach(item => {
+                if (category === 'all') {
+                    item.style.display = 'block';
+                } else if (item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Project modal functions
+        function openModal(projectId) {
+            // This would be replaced with actual project data in a real implementation
+            // const projects = {
+            //     'project1': {
+            //         title: 'Nexus Brand Identity',
+            //         category: 'Branding',
+            //         content: '<div class="grid gap-6"><div><img src="https://images.unsplash.com/photo-1510279770292-4b34de9f5c1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Nexus Branding" class="w-full rounded-lg"></div><div><h4 class="text-xl font-semibold mb-2">Project Overview</h4><p class="mb-4">Developed a comprehensive brand identity for Nexus, a tech startup specializing in AI solutions. The project included logo design, color palette, typography system, and brand guidelines.</p><h4 class="text-xl font-semibold mb-2">Challenges</h4><p class="mb-4">The client wanted a modern yet timeless identity that could appeal to both technical and non-technical audiences while standing out in a crowded market.</p><h4 class="text-xl font-semibold mb-2">Solution</h4><p>Created a modular logo system with a geometric aesthetic that represents connection and innovation. The color palette balances approachable blues with energetic accents, and the typography combines tech-inspired sans-serifs with humanist details.</p></div></div>'
+            //     },
+            //     'project2': {
+            //         title: 'Novel Book Cover',
+            //         category: 'Print Design',
+            //         content: '<div class="grid gap-6"><div><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Book Cover" class="w-full rounded-lg"></div><div><h4 class="text-xl font-semibold mb-2">Project Overview</h4><p class="mb-4">Designed the cover for "Midnight Whispers", a mystery novel by acclaimed author. The project included front cover, spine, and back cover designs for both print and digital editions.</p><h4 class="text-xl font-semibold mb-2">Challenges</h4><p class="mb-4">The publisher wanted a cover that hinted at the psychological thriller elements without being too graphic or literal, while also standing out in the crowded mystery genre.</p><h4 class="text-xl font-semibold mb-2">Solution</h4><p>Created a minimalist yet atmospheric design using negative space and a limited color palette. The typography treatment suggests tension and mystery while remaining elegant and readable at small sizes.</p></div></div>'
+            //     },
+            //     'project3': {
+            //         title: 'Fitness App UI',
+            //         category: 'Digital Design',
+            //         content: '<div class="grid gap-6"><div><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Fitness App" class="w-full rounded-lg"></div><div><h4 class="text-xl font-semibold mb-2">Project Overview</h4><p class="mb-4">Designed the user interface for FitTrack, a fitness tracking application that helps users monitor workouts, nutrition, and progress.</p><h4 class="text-xl font-semibold mb-2">Challenges</h4><p class="mb-4">The client needed an interface that could display complex fitness data in an intuitive way while maintaining energy and motivation throughout the user journey.</p><h4 class="text-xl font-semibold mb-2">Solution</h4><p>Developed a vibrant yet clean interface with a hierarchy that prioritizes key metrics. Used custom illustrations and animations to make the experience engaging. Created a comprehensive design system for consistency across all screens.</p></div></div>'
+            //     },
+            //     'project4': {
+            //         title: 'Organic Tea Packaging',
+            //         category: 'Packaging',
+            //         content: '<div class="grid gap-6"><div><img src="https://images.unsplash.com/photo-1583947581924-860bda6a26df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Tea Packaging" class="w-full rounded-lg"></div><div><h4 class="text-xl font-semibold mb-2">Project Overview</h4><p class="mb-4">Created packaging design for GreenLeaf Organics\' premium tea line, including six flavor variations and gift box sets.</p><h4 class="text-xl font-semibold mb-2">Challenges</h4><p class="mb-4">The packaging needed to communicate premium quality and organic sourcing while differentiating between flavors and complying with regulatory requirements.</p><h4 class="text-xl font-semibold mb-2">Solution</h4><p>Developed a sophisticated yet modern design system with hand-painted botanical illustrations for each flavor. Established a consistent layout system that allows for variation while maintaining brand cohesion. Special attention was paid to tactile elements like embossing and paper selection.</p></div></div>'
+            //     },
+            //     'project5': {
+            //         title: 'Corporate Stationery',
+            //         category: 'Branding',
+            //         content: '<div class="grid gap-6"><div><img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Business Cards" class="w-full rounded-lg"></div><div><h4 class="text-xl font-semibold mb-2">Project Overview</h4><p class="mb-4">Designed complete corporate stationery suite for Summit Consulting, including business cards, letterhead, envelopes, and presentation folders.</p><h4 class="text-xl font-semibold mb-2">Challenges</h4><p class="mb-4">The suite needed to reflect the firm\'s professional image while incorporating their new brand identity in a conservative industry that often resists bold design choices.</p><h4 class="text-xl font-semibold mb-2">Solution</h4><p>Created elegant yet modern designs using premium materials and subtle textural elements. Maintained consistent brand application while allowing each piece to function optimally. Special attention was given to typography hierarchy and layout systems that would work across various applications.</p></div></div>'
+            //     },
+            //     'project6': {
+            //         title: 'E-commerce Website',
+            //         category: 'Digital Design',
+            //         content: '<div class="grid gap-6"><div><img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="E-commerce Website" class="w-full rounded-lg"></div><div><h4 class="text-xl font-semibold mb-2">Project Overview</h4><p class="mb-4">Designed the user interface and experience for Crafted, an online marketplace for handmade goods from artisans worldwide.</p><h4 class="text-xl font-semibold mb-2">Challenges</h4><p class="mb-4">The platform needed to showcase diverse products while maintaining a cohesive shopping experience. Special attention was needed for product filtering, vendor profiles, and checkout flow optimization.</p><h4 class="text-xl font-semibold mb-2">Solution</h4><p>Developed a flexible design system that allows product diversity while maintaining brand consistency. Created intuitive navigation patterns and search functionality. Implemented a step-by-step checkout process with clear progress indicators to reduce cart abandonment.</p></div></div>'
+            //     }
+            };
+
+            document.getElementById('modalTitle').textContent = projects[projectId].title;
+            document.getElementById('modalCategory').textContent = projects[projectId].category;
+            document.getElementById('modalContent').innerHTML = projects[projectId].content;
+            document.getElementById('projectModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+       // }
+
+        function closeModal() {
+            document.getElementById('projectModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside content
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
